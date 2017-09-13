@@ -24,7 +24,7 @@ const runQuery = 'https://data.cityofchicago.org/resource/rjgc-4h37.json?$order=
 //the api is stored in a constant
 
 axios.get(runQuery + year, );
-// Where we can change the 'year' to retrive the top vendors form a specific year.
+// Where we can change the 'year' to retrieve the top vendors form a specific year.
 
 ```
 
