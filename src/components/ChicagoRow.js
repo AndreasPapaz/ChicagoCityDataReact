@@ -20,13 +20,13 @@ class ChicagoRow extends Component {
 		return(
 			<Table.Row>
 				<Table.Cell>
-					<Header as='h2'>{this.props.id}</Header>
+					<Header as='h3'>{this.props.id}</Header>
 				</Table.Cell>
 				<Table.Cell>
-					<Header as='h4'>{this.props.chicagoData.vendor_name}</Header>
+					<Header as='h6'>{this.props.chicagoData.vendor_name}</Header>
 				</Table.Cell>
 				<Table.Cell>
-					<Header as='h4'>{this.state.amount}</Header>
+					<Header as='h6'>{this.state.amount}</Header>
 				</Table.Cell>
 			</Table.Row>
 		)
