@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Input, Table } from 'semantic-ui-react';
 import axios from 'axios';
-import _ from 'lodash';
 import ChicagoRow from './ChicagoRow';
 import SearchYear from './SearchYear';
 
@@ -16,9 +15,9 @@ class ChicagoTable extends Component {
 			list: [],
 			year: 2011
 		};
-		this.searchChicago(2015);
+		this.searchChicago = this.searchChicago.bind(this);
 	}
-	searchChicago(year) {
+	searchChicago(year = 2015) {
 		axios.get(runQuery + year, ).then(data => {
 
 			const uploadedChicago = data.data;
@@ -33,12 +32,15 @@ class ChicagoTable extends Component {
 		});
 	}
 
+	componentDidMount() {
+		this.searchChicago();
+	}
+
 	render() {
-		const searchChicago = _.debounce((term) => { this.searchChicago(term) }, 50);
 		return (
 			<Container text>
 				<h1> Search Year : 
-					<SearchYear onSearchYearChange={searchChicago} />
+					<SearchYear onSearchYearChange={this.searchChicago} />
 				</h1>
 				<Header as='h2'> TOP VENDORS OF {this.state.year}</Header>
 				<Table celled fixed singleLine>
