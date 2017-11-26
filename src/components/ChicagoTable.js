@@ -1,34 +1,42 @@
 import React, { Component } from 'react';
-import { Container, Header, Input, Table } from 'semantic-ui-react';
+import { Container, Header, Table } from 'semantic-ui-react';
 import axios from 'axios';
 import ChicagoRow from './ChicagoRow';
-import SearchYear from './SearchYear';
 
 
-const runQuery = 'https://data.cityofchicago.org/resource/rjgc-4h37.json?$order=amount DESC&$limit=10&check_date=';
+// const runQuery = 'https://data.cityofchicago.org/resource/rjgc-4h37.json?$order=amount DESC&$limit=10&check_date=';
+const runQuery = 'https://data.cityofchicago.org/resource/tt4n-kn4t.json?$where=annual_salary > 0 &$limit=10&$order=annual_salary DESC';
 
 
 class ChicagoTable extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			list: [],
-			year: 2011
+			list: []
 		};
 		this.searchChicago = this.searchChicago.bind(this);
 	}
-	searchChicago(year = 2015) {
-		axios.get(runQuery + year, ).then(data => {
+	searchChicago() {
+		// axios.get(runQuery + year, ).then(data => {
 
+		// 	const uploadedChicago = data.data;
+
+		// 	let updatedData = Object.assign([], this.state.list);
+		// 		updatedData.push(uploadedChicago);
+
+		// 	this.setState({
+		// 		list: uploadedChicago,
+		// 		year: year
+		// 	});
+		// });
+		axios.get(runQuery).then(data => {
+			console.log(data.data);
 			const uploadedChicago = data.data;
 
 			let updatedData = Object.assign([], this.state.list);
 				updatedData.push(uploadedChicago);
 
-			this.setState({
-				list: uploadedChicago,
-				year: year
-			});
+			this.setState({ list: uploadedChicago });
 		});
 	}
 
@@ -39,16 +47,14 @@ class ChicagoTable extends Component {
 	render() {
 		return (
 			<Container text>
-				<h1> Search Year : 
-					<SearchYear onSearchYearChange={this.searchChicago} />
-				</h1>
-				<Header as='h2'> TOP VENDORS OF {this.state.year}</Header>
+				<Header as='h2'> Highest Salaires in Chicago </Header>
 				<Table celled fixed singleLine>
 				    <Table.Header>
 				      <Table.Row>
 				        <Table.HeaderCell>#Number</Table.HeaderCell>
-				        <Table.HeaderCell>Company</Table.HeaderCell>
-				        <Table.HeaderCell>Amount</Table.HeaderCell>
+				        <Table.HeaderCell>Department</Table.HeaderCell>
+				        <Table.HeaderCell>Name</Table.HeaderCell>
+				        <Table.HeaderCell>Salary</Table.HeaderCell>
 				      </Table.Row>
 				    </Table.Header>
 

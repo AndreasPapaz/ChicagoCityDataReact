@@ -11,7 +11,7 @@ class ChicagoRow extends Component {
 		}
 	}
 	componentWillMount() {
-		let amountNumber = numeral(this.props.chicagoData.amount).format('$0,0.00');
+		let amountNumber = numeral(this.props.chicagoData.annual_salary).format('$0,0.00');
 		this.setState({
 			amount: amountNumber
 		});
@@ -23,7 +23,10 @@ class ChicagoRow extends Component {
 					<Header as='h3'>{this.props.id}</Header>
 				</Table.Cell>
 				<Table.Cell>
-					<Header as='h6'>{this.props.chicagoData.vendor_name}</Header>
+				<Table.Cell>
+					<Header as='h3'>{this.props.chicagoData.department}</Header>
+				</Table.Cell>
+					<Header as='h6'>{this.props.chicagoData.name}</Header>
 				</Table.Cell>
 				<Table.Cell>
 					<Header as='h6'>{this.state.amount}</Header>
